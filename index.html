@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Problem Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f0f0;
+    }
+    #problem {
+      margin: 20px;
+      font-size: 1.5rem;
+      text-align: center;
+      max-width: 600px;
+    }
+    svg {
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    svg:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="problem">Click the button to get a problem.</div>
+
+  <!-- SVG Button -->
+  <svg id="btn" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" fill="#4CAF50"/>
+    <polygon points="40,30 70,50 40,70" fill="white"/>
+  </svg>
+
+  <script>
+    const problems = [
+      "Your best friend spends too much time on social media and never studies.",
+      "You forgot your homework at home but the teacher is collecting it today.",
+      "A classmate always borrows your things and never returns them.",
+      "You want to improve your English speaking but feel too shy to practice.",
+      "You had a fight with your best friend and now you don’t talk anymore.",
+      "You are always late for school because you go to bed too late.",
+      "Your parents want you to become a doctor but you want to be a musician.",
+      "You promised to help a friend but you also need to study for a test.",
+      "You want to make new friends but you are afraid of starting conversations.",
+      "You spend all your allowance in the first week of the month.",
+      "Your phone battery always dies during the day because you forget to charge it.",
+      "You have too many extracurricular activities and no time to rest.",
+      "Your internet connection is slow and you cannot do your homework online.",
+      "You forgot your friend’s birthday and now they are upset.",
+      "You want to join a sports team but you are afraid you are not good enough.",
+      "Your neighbor’s dog barks all night and you can’t sleep.",
+      "You want to eat healthier but you love junk food.",
+      "You lost your bus card and have no money for transportation.",
+      "You spend too much time playing video games and your grades are falling.",
+      "You want to travel abroad but you are scared of speaking another language.",
+      "Your backpack is always too heavy and hurts your shoulders.",
+      "You want to buy a new phone but you don’t have enough savings.",
+      "You forgot to study for a quiz and it is tomorrow.",
+      "You want to learn a new instrument but you don’t have enough time.",
+      "Your parents do not allow you to go to a party your friends invited you to.",
+      "You always lose your keys and are late for everything.",
+      "Your teacher gave you a group project but your teammates never work.",
+      "You have stage fright but you must give a presentation in class.",
+      "You want to get better at drawing but you feel you’re not talented.",
+      "You have trouble waking up early every morning.",
+      "Your little brother always interrupts you when you study.",
+      "You need to save money but you love buying clothes.",
+      "You promised your parents to clean your room but you keep forgetting.",
+      "You have an argument with your cousin and don’t know how to make peace.",
+      "Your computer is old and crashes when you try to do schoolwork.",
+      "You love sports but your best friend prefers reading books.",
+      "You forgot your gym clothes and today is P.E. class.",
+      "You have too many messages on your phone and feel stressed.",
+      "Your parents do not want you to stay up late but you want to watch a show.",
+      "You have two events on the same day and can’t decide which one to attend.",
+      "You want to learn cooking but you often burn the food.",
+      "You want to talk to a new student but don’t know what to say.",
+      "You want to improve your grades but don’t know where to start.",
+      "Your teacher gave too much homework and you don’t have time for hobbies.",
+      "You want to save the planet but your family uses a lot of plastic.",
+      "You like a subject but your teacher makes it boring.",
+      "Your room is always messy and you can’t find your things.",
+      "You want to buy a gift for your friend but don’t know what to choose.",
+      "You don’t understand a math lesson but feel embarrassed to ask for help.",
+      "Your favorite game was banned at school and you feel upset.",
+      "You want to spend less time online but all your friends are there.",
+      "You are tired because you sleep too late on weekdays.",
+      "You want to help at home but you already have too much homework.",
+      "You always forget important dates and disappoint your friends.",
+      "Your family wants to move but you don’t want to leave your school.",
+      "You got a low grade and don’t know how to tell your parents.",
+      "You promised to water a neighbor’s plants but you forgot.",
+      "You want to learn how to swim but you are afraid of water.",
+      "Your shoes are old but your parents won’t buy new ones yet.",
+      "You are always nervous before tests.",
+      "You like singing but you are afraid people will laugh at you.",
+      "You want to start exercising but you don’t know how.",
+      "You want to spend more time with family but are always busy.",
+      "You lost your library book and must pay a fine.",
+      "You want to write a story but don’t know how to begin.",
+      "You want to spend less money but always buy snacks at school.",
+      "You promised to join a club but don’t really want to.",
+      "Your parents don’t let you play video games during the week.",
+      "You want to apologize but don’t know the right words.",
+      "You are nervous about making mistakes when speaking English.",
+      "Your teacher asked you to speak in front of the class but you are shy.",
+      "You forgot to bring lunch and feel hungry during class.",
+      "You want to improve at sports but always lose.",
+      "You have a secret but you don’t know if you should tell a friend.",
+      "You want to be more organized but your desk is always messy.",
+      "You want to wake up earlier but always press snooze.",
+      "You have to babysit your sibling but you want to go out.",
+      "Your bike is broken but you need it to get to school.",
+      "You are jealous of a friend’s new phone.",
+      "You want to be more confident but don’t know how.",
+      "You have to share a computer with your sibling and fight over it.",
+      "You want to spend less time watching TV but love your favorite show.",
+      "You want to lose weight but don’t like exercise.",
+      "You have too many apps on your phone and can’t focus.",
+      "You like a person in your class but don’t know how to talk to them.",
+      "You forgot to bring your notebook and can’t take notes.",
+      "You promised to join a team but don’t really enjoy it.",
+      "You always forget your password and can’t log in.",
+      "You want to do better in science but it’s too hard.",
+      "You promised to help your mom but you are too tired.",
+      "You want to spend less time online but can’t stop scrolling.",
+      "You always forget to bring water and feel thirsty in class.",
+      "You want to be more polite but sometimes you get angry.",
+      "You have too many clothes but none that you like.",
+      "You want to write in English every day but don’t know what to write."
+    ];
+
+    const problemDiv = document.getElementById('problem');
+    const btn = document.getElementById('btn');
+
+    btn.addEventListener('click', () => {
+      const randomIndex = Math.floor(Math.random() * problems.length);
+      problemDiv.textContent = problems[randomIndex];
+    });
+  </script>
+</body>
+</html>
 
